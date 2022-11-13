@@ -1,0 +1,355 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=960px">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"   rel="stylesheet">
+
+  <title>Contact Us</title>
+</head>
+<body>
+  <div class="about-logo ">
+    <img src="bryImage/2 2.png" alt="">
+  </div>
+  <button class="btn-back">
+    <i class="material-icons md-36"> <a href="index.html">home</a> </i>
+</button>
+<div class="icon-contact">
+  <i class="material-icons md-36">phone</i>
+  <h4>Contact Us</h4>
+</div>
+
+<div class="row">
+<div class="col1" >
+       
+      
+  <p class="qoute">Bryant's Law zealously advocates <br> for the clients best interests solely <br> based upon the clients instructions.</p>
+
+
+
+</div>
+
+<div class="contact-form">
+  <form class="gform pure-form pure-form-stacked" method="POST" data-email="savtech2022@gmail.com"
+    action="https://script.google.com/macros/s/AKfycbyCjySa_Q3bGiO6315wbF5ma1-w1RLW0-nDP8kmvwVD5Gh0md_up8Obfkud0KZ4Gmsd-g/exec">
+    <div class="form-elements"><br>
+      <div ><br>
+   <h1>Query Form</h1>
+
+        <input type="text" name="name" required="" placeholder="Enter your name..."/><br><br>
+
+        
+        <input type="email" name="email" required="" placeholder="Enter your email address..."/><br><br>
+
+   
+         <input type="number"  name="phone" required=""placeholder="Enter your phone number..."/><br><br>
+      
+
+        <textarea  name="message" rows="5" cols="22" required="" placeholder="Enter your message..."></textarea><br><br>
+    
+        <button > send</button><br>
+      </div>
+    </div>
+
+    <!-- Thankyou_message --><br>
+    <div class="thankyou_message" style="display:none;background:none;
+      width: 80%;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;border:8px solid gray;border-radius: 40px;width: 400px;padding-top: 15px;padding-bottom: 40px;padding-left: 20px;padding-right: 20px;"><br><br>
+      <h1>Thanks for contacting us!</h1>
+      <h1>*******</h1>
+    </div>
+  </form>
+</div>
+</div>
+  <script data-cfasync="false" type="text/javascript">
+    
+   (function() {
+  function validEmail(email) {
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
+  }
+
+  function validateHuman(honeypot) {
+    if (honeypot) {
+      console.log("Robot Detected!");
+      return true;
+    } else {
+      console.log("Welcome Human!");
+    }
+  }
+  function getFormData(form) {
+    var elements = form.elements;
+
+    var fields = Object.keys(elements).filter(function(k) {
+          return (elements[k].name !== "honeypot");
+    }).map(function(k) {
+      if(elements[k].name !== undefined) {
+        return elements[k].name;
+      }else if(elements[k].length > 0){
+        return elements[k].item(0).name;
+      }
+    }).filter(function(item, pos, self) {
+      return self.indexOf(item) == pos && item;
+    });
+
+    var formData = {};
+    fields.forEach(function(name){
+      var element = elements[name];
+      formData[name] = element.value;
+      if (element.length) {
+        var data = [];
+        for (var i = 0; i < element.length; i++) {
+          var item = element.item(i);
+          if (item.checked || item.selected) {
+            data.push(item.value);
+          }
+        }
+        formData[name] = data.join(', ');
+      }
+    });
+
+    // add form-specific values into the data
+    formData.formDataNameOrder = JSON.stringify(fields);
+    formData.formGoogleSheetName = form.dataset.sheet || "Sheet1"; // default sheet name
+    formData.formGoogleSendEmail = form.dataset.email || ""; // no email by default
+
+    console.log(formData);
+    return formData;
+  }
+
+  function handleFormSubmit(event) {  
+    event.preventDefault();           
+    var form = event.target;
+    var data = getFormData(form);         
+    if( data.email && !validEmail(data.email) ) {   
+      var invalidEmail = form.querySelector(".email-invalid");
+      if (invalidEmail) {
+        invalidEmail.style.display = "block";
+        return false;
+      }
+    } else {
+      disableAllButtons(form);
+      var url = form.action;
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', url);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function() {
+          console.log(xhr.status, xhr.statusText);
+          console.log(xhr.responseText);
+          var formElements = form.querySelector(".form-elements")
+          if (formElements) {
+            formElements.style.display = "none"; // hide form
+          }
+          var thankYouMessage = form.querySelector(".thankyou_message");
+          if (thankYouMessage) {
+            thankYouMessage.style.display = "block";
+          }
+          return;
+      };
+      var encoded = Object.keys(data).map(function(k) {
+          return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
+      }).join('&');
+      xhr.send(encoded);
+    }
+  }
+  
+  function loaded() {
+    console.log("Contact form submission handler loaded successfully.");
+    var forms = document.querySelectorAll("form.gform");
+    for (var i = 0; i < forms.length; i++) {
+      forms[i].addEventListener("submit", handleFormSubmit, false);
+    }
+  };
+  document.addEventListener("DOMContentLoaded", loaded, false);
+
+  function disableAllButtons(form) {
+    var buttons = form.querySelectorAll("button");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = true;
+    }
+  }
+})();
+
+
+  </script>
+
+<style>
+  body{
+    
+    background: #050A30;
+  }
+  form{
+  margin-left: 50%;
+  margin-top: -30%;
+ 
+  color: #050A30;
+  padding: 11px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+    
+ 
+
+    
+  }
+  .contact-form{
+    margin-top: -20%;
+  }
+  form input{
+    height: 50%;
+    width: 80%;
+font-family: sans-serif;
+    font-size: 15px;
+    margin-bottom: 5px;
+    height: 30px;
+  }
+  form textarea{
+    font-size: 15px;
+    width: 80%;
+  
+    font-family: sans-serif;
+
+  }
+  form button{
+    width: 20%;
+    height: 50px;
+    font-size: 18px;
+    background: #050A30;
+    color: white;
+  }
+
+  .row{
+    margin-left: 5.9%;
+margin-right:5.5%;
+position: fixed;
+width:90%;
+height: 450px;
+  margin-top: 0%;
+  background: white;
+  color: #050A30;
+  }
+
+
+  .row .col1{
+    background: #050A30;
+    color: rgb(219, 206, 183);
+    margin-top: 0%;
+    margin: 0 auto;
+   
+    margin-left: 5%;
+    width: 35%;
+    height: 70%;
+    
+  }
+
+   .row .col1 p{
+   background:#050A30;
+   margin-top: 25%;
+  display: block;
+ font-size: 22px;
+  text-align: center;
+   line-height: 1.5;
+   color: rgb(199,147,48);
+   font-size: 18px;
+  
+   
+
+  }
+  p{
+    display: block;
+    margin-top: 25%;
+  text-align: center;
+   line-height: 1.5;
+   color: rgb(199,147,48);
+
+   font-size: 22px;
+
+
+  }
+
+
+
+.btn-back:hover {
+
+box-shadow: 0 1px 15px rgba(4, 242, 250, 0.438), 0 1px 28px rgba(5, 219, 247, 0.815);
+}
+
+.btn-back{
+      background: #050A30;
+      box-shadow: 0 1px 10px black;
+      border: none;
+
+      color: white;
+      margin-left: 89%;
+      margin-top: 1%;
+      border-radius: 50%;
+      height:85px;
+      width: 85px;
+     
+  }
+
+  .btn-back i a{
+      text-decoration:none ;
+      color: white;
+      font-size: 20px;
+      margin: 0 auto;
+      
+
+    
+
+  }
+
+
+.icon-contact{
+display: block;
+margin: 0 auto;
+text-align: center;
+margin-top: -5%;
+
+  color: white;
+  padding: 10px;
+
+}
+.icon-contact i{
+  color: white;
+  font-size: 23px;
+  
+}
+.icon-contact h4{
+  color: white;
+font-size: 23px;
+margin-top: 0%;
+}
+  
+
+.about-logo{
+  margin-top: -5%;
+  margin-left: 5%;
+  display: block;
+  height: 100px;
+  width: 180px;
+  background: #050A30;
+
+
+      }
+        .about-logo img{
+          display: block;
+  margin-left: 0%;
+  height: 300px;
+  width: 300px;
+  top: -1%;
+  
+  }
+
+
+
+
+</style>
+</body>
+</html>

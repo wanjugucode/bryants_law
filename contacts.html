@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"   rel="stylesheet">
+ 
+  
+    <title>Contact us</title>
+</head>
+<body>
+
+  <div class="about-logo ">
+    <img src="bryImage/2 2.png" alt="">
+  </div>
+  <button class="btn-back" onclick="location.href='index.html'; ">
+    <i class="material-icons md-36"> <a>home</a> </i>
+</button>
+<div class="icon-contact">
+  <i class="material-icons md-36">phone</i>
+  <h4>Contact Us</h4>
+</div>
+ 
+
+     
+        <div class="row">
+          <div class="col contact" >
+       
+      
+          <q class="qoute">Bryant's Law zealously advocates <br> for the clients best interests solely <br> based upon the clients instructions.</q>
+
+
+   
+  </div>
+  
+  <div class="col contact-form">
+ 
+
+ <h1>Query Form</h1>
+ <form class="gform pure-form pure-form-stacked" method="POST" data-email="savtech2022@gmail.com"
+ action="https://script.google.com/macros/s/AKfycbyCjySa_Q3bGiO6315wbF5ma1-w1RLW0-nDP8kmvwVD5Gh0md_up8Obfkud0KZ4Gmsd-g/exec">
+ <div class="form-elements"><br>
+
+ <input type="text" name="name" required="" placeholder="Enter your name..."/>
+
+ <input type="number"  name="phone" required=""placeholder="Enter your phone number..."/>
+  <input type="email" name="email" required="" placeholder="Enter your email address..."/>
+  <textarea  name="message" rows="5" cols="22" required="" placeholder="Enter your message..."></textarea><br><br>
+
+ <button class="submit">Send</button>
+</div>
+ <div class="thankyou_message" style="display:none; color:white;
+ margin-left:10% ; margin-top: 10%; background:#050A30;border:8px solid rgb(199,147,48);border-radius: 40px;width: 400px;padding-top: 15px;padding-bottom: 40px;padding-left: 20px;padding-right: 20px;"><br><br>
+ <h1>Thanks for contacting us!</h1>
+ <h1>*******</h1>
+</div>
+
+</form>
+
+
+</div>
+
+</div>
+<script data-cfasync="false" type="text/javascript">
+    
+  (function() {
+ function validEmail(email) {
+   var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+   return re.test(email);
+ }
+
+ function validateHuman(honeypot) {
+   if (honeypot) {
+     console.log("Robot Detected!");
+     return true;
+   } else {
+     console.log("Welcome Human!");
+   }
+ }
+ function getFormData(form) {
+   var elements = form.elements;
+
+   var fields = Object.keys(elements).filter(function(k) {
+         return (elements[k].name !== "honeypot");
+   }).map(function(k) {
+     if(elements[k].name !== undefined) {
+       return elements[k].name;
+     }else if(elements[k].length > 0){
+       return elements[k].item(0).name;
+     }
+   }).filter(function(item, pos, self) {
+     return self.indexOf(item) == pos && item;
+   });
+
+   var formData = {};
+   fields.forEach(function(name){
+     var element = elements[name];
+     formData[name] = element.value;
+     if (element.length) {
+       var data = [];
+       for (var i = 0; i < element.length; i++) {
+         var item = element.item(i);
+         if (item.checked || item.selected) {
+           data.push(item.value);
+         }
+       }
+       formData[name] = data.join(', ');
+     }
+   });
+
+   // add form-specific values into the data
+   formData.formDataNameOrder = JSON.stringify(fields);
+   formData.formGoogleSheetName = form.dataset.sheet || "Sheet1"; // default sheet name
+   formData.formGoogleSendEmail = form.dataset.email || ""; // no email by default
+
+   console.log(formData);
+   return formData;
+ }
+
+ function handleFormSubmit(event) {  
+   event.preventDefault();           
+   var form = event.target;
+   var data = getFormData(form);         
+   if( data.email && !validEmail(data.email) ) {   
+     var invalidEmail = form.querySelector(".email-invalid");
+     if (invalidEmail) {
+       invalidEmail.style.display = "block";
+       return false;
+     }
+   } else {
+     disableAllButtons(form);
+     var url = form.action;
+     var xhr = new XMLHttpRequest();
+     xhr.open('POST', url);
+     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+     xhr.onreadystatechange = function() {
+         console.log(xhr.status, xhr.statusText);
+         console.log(xhr.responseText);
+         var formElements = form.querySelector(".form-elements")
+         if (formElements) {
+           formElements.style.display = "none"; // hide form
+         }
+         var thankYouMessage = form.querySelector(".thankyou_message");
+         if (thankYouMessage) {
+           thankYouMessage.style.display = "block";
+         }
+         return;
+     };
+     var encoded = Object.keys(data).map(function(k) {
+         return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
+     }).join('&');
+     xhr.send(encoded);
+   }
+ }
+ 
+ function loaded() {
+   console.log("Contact form submission handler loaded successfully.");
+   var forms = document.querySelectorAll("form.gform");
+   for (var i = 0; i < forms.length; i++) {
+     forms[i].addEventListener("submit", handleFormSubmit, false);
+   }
+ };
+ document.addEventListener("DOMContentLoaded", loaded, false);
+
+ function disableAllButtons(form) {
+   var buttons = form.querySelectorAll("button");
+   for (var i = 0; i < buttons.length; i++) {
+     buttons[i].disabled = true;
+   }
+ }
+})();
+
+
+ </script>
+<style>
+  .body{
+    font-family: sans-serif;
+  }
+      @media only screen and (min-width: 375px) and (max-width: 1290px){
+
+    .row .col.contact{
+   height: 80%;
+
+    }
+  }
+  .row .col.contact-form h1{
+    margin-left: 25%;
+    font-size:150%;
+  }
+  .row .col.contact-form{
+    margin-left: 9%;
+    margin-top: 0%;
+  }
+  .row .col.contact{
+    background: #050A30;
+    color: rgb(219, 206, 183);
+    margin-top: 5.5%;
+    margin-left: 5%;
+    width: 35%;
+    height: 70%;
+   
+
+  }
+  q{
+    display: block;
+    margin-top: 25%;
+  text-align: center;
+   line-height: 1.5;
+   color: rgb(199,147,48);
+
+   font-size: 18px;
+   
+
+
+  }
+  p{
+text-align: center; 
+margin-top: 25%; }
+  body{
+    background: #050A30;
+    font-family: sans-serif;
+
+  }
+  .col {
+  float: left;
+  width: 50%;
+  margin-bottom: 0%;
+  
+}
+
+.row{
+margin-left: 5.9%;
+margin-right:5.5%;
+width:auto;
+height: 450px;
+  margin-top: 2%;
+  background: white;
+  color: #050A30;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+      .submit{
+        display: block;
+  background: #050A30;
+ 
+margin-left: 30%;
+  color: white;
+  margin-top: 0px;
+  height: 38px;
+  width: 18%;
+  font-size: 18px;
+  }
+
+input{
+  width: 80%;
+  color: #050A30;
+  padding: 11px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+textarea{
+  width: 80%;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+  font-family: sans-serif;
+}
+
+
+button:hover {
+
+box-shadow: 0 1px 15px rgba(4, 242, 250, 0.438), 0 1px 28px rgba(5, 219, 247, 0.815);
+}
+
+.btn-back{
+      background: #050A30;
+      box-shadow: 0 1px 10px black;
+      border: none;
+
+      color: white;
+      margin-left: 89%;
+      margin-top: 1%;
+      border-radius: 50%;
+      height:85px;
+      width: 85px;
+     
+  }
+
+  .btn-back i a{
+      text-decoration:none ;
+      color: white;
+      font-size: 20px;
+      margin: 0 auto;
+      
+
+    
+
+  }
+
+
+.icon-contact{
+display: block;
+margin: 0 auto;
+text-align: center;
+margin-top: -5%;
+
+  color: white;
+  padding: 10px;
+
+}
+.icon-contact i{
+  color: white;
+  font-size: 23px;
+  
+}
+.icon-contact h4{
+  color: white;
+font-size: 23px;
+margin-top: 0%;
+}
+  
+
+.about-logo{
+  margin-top: -5%;
+  margin-left: 5%;
+  display: block;
+  height: 100px;
+  width: 180px;
+  background: #050A30;
+
+
+      }
+        .about-logo img{
+          display: block;
+  margin-left: 0%;
+  height: 300px;
+  width: 300px;
+  top: -1%;
+  
+  }
+
+
+
+
+
+
+    </style>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+  function sendEmail(){
+ 
+    Email.send({
+        Host : "smtp.gmail.com",
+        Username : "karobiaanastasia@gmail.com",
+        Password : " WambakiAn!2020.",
+        To : 'karobiaannah@gmail.com',
+        From : document.getElementById("email").value,
+        Subject : "This is my subject",
+        Body : message
+    }).then(
+      message => alert(message)
+    );
+    }
+
+    </script>
+</body>
+</html>

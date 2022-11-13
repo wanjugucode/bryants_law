@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ 
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+
+  <title>About us</title>
+</head>
+
+<body>
+
+  <div class="about-logo ">
+    <img src="bryImage/2 2.png" alt="">
+  </div>
+  <button class="btn-back">
+    <i class="material-icons md-36"> <a href="index.html">home</a> </i>
+</button>
+<div class="icon-contact">
+  <i class="material-icons md-36">groups</i>
+  <h4>About us</h4>
+</div>
+ 
+  <div class="about-img">
+    <img src="bryImage/about.jpg" alt="">
+  </div>
+
+  <div class="about-content">
+
+    <h4 >Bryants Law LLP</h4>
+      <p>Bryants Law LLP is a new and diverse team of highly skilled professionals
+        providing outstanding legal services in an efficient, cost-effective and holistic manner.</p>
+      <p> We are all trained as lawyers but we recognize that not every client concern requires a
+        traditional legal approach, instead we think outside of the box, working with our clients to
+        identify and address all aspects of individual or organizational need, always striving to find
+        strategic and practical yet comprehensive solutions. 
+        <br>
+        <!-- Of course, if your matter needs to go to court, our team includes licensed advocates who do that
+         too! While we are based in Nairobi, Kenya, our core team has a vast array of legal and non-legal
+          experiences in other jurisdictions and, if our in-house experience does not address your need
+           sufficiently, we also have an ever-growing roster of local and international consultants that 
+           we call on as necessary to ensure that our clients get the most relevant and expert advice in 
+           a given situation.  <br>
+           We are committed to providing the highest quality client-centred legal
+            services by applying a sound and ethical approach in a creative and dynamic team environment,
+             with the ability to serve our clients in both English and Kiswahili. 
+      </p>
+     -->
+
+      <div class="learn-more">
+
+        
+      <a class="read-more"></a>
+
+      </div>
+
+  </div>
+
+
+
+
+  <script>
+    let more = document.querySelectorAll('.read-more')
+    for (let i = 0; i < more.length; i++) {
+      more[i].addEventListener('click', function () {
+        more[i].parentNode.classList.toggle('active')
+      })
+    }
+  </script>
+
+
+
+
+  <style>
+
+
+.about-content .learn-more .read-more::before{
+  content: "Read More";
+}
+.about-content .learn-more.active .read-more::before{
+  content: 'Read Less';
+}
+
+
+    .title{
+      font-weight: 700;
+      margin-top: 8%;
+    }
+        .about-content {
+      width: 25%;
+      margin-left: 47%;
+      width: 33.33%;
+      margin-right: -5%;
+      text-align: justify;
+      margin-top: -33.7%;
+  
+
+
+    }
+
+    .about-content p {
+      font-size: 20px;
+      line-height: 1.8;
+      width: 140%;
+      height: auto;
+      height: auto;
+      margin-right: 0%;
+      overflow: hidden;
+    }
+    .about-content.active p {
+      height: auto;
+    }
+    .about-content.active p::before  {
+      display: none;
+    }
+
+
+.icon-about{
+margin-top: -7%;
+  margin-left: 42%;
+  padding: 2%;
+}
+.icon-about i{
+  margin-left: 6.5%;
+  font-size: 40px;
+}
+.icon-about h3{
+  margin-left: 1.5%;
+}
+
+
+
+    body {
+      background: #050A30;
+      width: auto;
+      color: white;
+      overflow-y: scroll;
+      font-family: sans-serif 
+    }
+
+ 
+    button:hover {
+
+box-shadow: 0 1px 15px rgba(4, 242, 250, 0.438), 0 1px 28px rgba(5, 219, 247, 0.815);
+}
+
+.btn-back{
+      background: #050A30;
+      box-shadow: 0 1px 10px black;
+      border: none;
+
+      color: white;
+      margin-left: 89%;
+      margin-top: 1%;
+      border-radius: 50%;
+      height:85px;
+      width: 85px;
+     
+  }
+
+  .btn-back i a{
+      text-decoration:none ;
+      color: white;
+      font-size: 20px;
+      margin: 0 auto;
+      
+
+    
+
+  }
+
+
+.icon-contact{
+display: block;
+margin: 0 auto;
+text-align: center;
+margin-top: -5%;
+
+  color: white;
+  padding: 10px;
+
+}
+.icon-contact i{
+  color: white;
+  font-size: 23px;
+  
+}
+.icon-contact h4{
+  color: white;
+font-size: 23px;
+}
+  
+
+.about-logo{
+  margin-top: -5%;
+  margin-left: 5%;
+  display: block;
+  height: 100px;
+  width: 180px;
+  background: #050A30;
+
+
+      }
+        .about-logo img{
+          display: block;
+  margin-left: 0%;
+  height: 300px;
+  width: 300px;
+  top: -1%;
+  
+  }
+
+
+
+
+
+
+    .about-img {
+      height: 33%;
+      width: 33%;
+    margin-left: 6%;
+    margin-top:2%;
+}
+
+/* Resize images */
+.about-img img {
+    width: 100%;
+    height: auto;
+    opacity: 90%;
+}
+
+
+
+    .learn-more:hover {
+
+      color: white;
+      color: #050A30;
+      background-color: white;
+      text-decoration: underline;
+    }
+
+
+
+
+    .learn-more a {
+      text-decoration: none;
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+      display: block;
+      text-align: center;
+      display: block;
+      margin-top: -5%;
+      padding: 5px;
+
+
+
+    }
+
+    .about-content .learn-more {
+      margin-top: 11%;
+      background: rgb(164, 122, 47);
+      padding: 5%;
+      width: 50%;
+
+    }
+
+
+  </style>
+
+</body>
+
+</html
